@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="spring-boot-starter-security"/>
 			<item value="hidedn"/>
 			<item value="hidden"/>
 			<item value="button"/>

@@ -1,0 +1,11 @@
+package com.example.manualizer.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.manualizer.entity.Content;
+import org.springframework.stereotype.Repository;
+
+/** Manualテーブル : RepositoryImpl */
+@Repository
+public interface ManualRepository extends JpaRepository<Content, Integer>{
+}

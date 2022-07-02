@@ -37,12 +37,20 @@
           <!-- 検索 end -->
 
           <!-- 新規登録ボタン start -->
-          <div class="d-grid col-2">
+          <div class="d-grid col-1">
           	<form method="GET" th:action="@{/content/create}">
           		<input type=submit value="新規作成" class="btn btn-success" role="button" aria-disabled="true">
             </form>
           </div>
           <!-- 新規登録ボタン end -->
+          
+          <!-- ログアウトボタン start -->
+          <div class="d-grid col-1">
+          	<form th:action="@{/logout}" method="post">
+          		<input type=submit value="ログアウト" class="btn btn-danger" role="button" aria-disabled="true">
+            </form>
+          </div>
+          <!-- ログアウトボタン end -->
 
         </div>
       </div>   
