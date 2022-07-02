@@ -1,0 +1,31 @@
+package com.example.manualizer;
+
+import org.springframework.beans.factory.annotation.AutoWired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.example.manualizer.entity.Manual;
+import com.example.manualizer.repository.ManualRepository;
+
+@SpringBootApplication
+public class ManualizerApplication {
+	/** 起動メソッド */
+	public static void main(String[] args) {
+		SpringApplication.run(ManualizerApplication.class, args).getBean(ManualApplication.class).execute();
+	}
+	/** 注入 */
+	@Autowired
+	ManualRepository repository;
+	
+	/** 実行メソッド */
+	private void execute() {
+		// 登録処理
+		setup();
+	}
+	/** マニュアルを2件登録します */
+	private void setup() {
+		// エンティティ生成
+		Manual manual1 = new Manual(null, 'サンプル02', 'ここに説明文が入るのだが、これはサンプルなのだ', now(), now());
+	}
+
+}

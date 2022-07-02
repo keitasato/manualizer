@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>check</title>
+<link th:href="@{/webjars/bootstrap/5.0.2/css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+<body >
+<span class="badge bg-primary">Primary</span>
+<span class="badge bg-secondary">Secondary</span>
+<span class="badge bg-success">Success</span>
+<span class="badge bg-danger">Danger</span>
+<span class="badge bg-warning text-dark">Warning</span>
+<span class="badge bg-info text-dark">Info</span>
+<span class="badge bg-light text-dark">Light</span>
+<span class="badge bg-dark">Dark</span>
+<script th:src="@{/webjars/bootstrap/5.0.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+package com.example.manualizer.service;
+
+import java.util.Optional;
+
+import com.example.manualizer.entity.Content;
+
+public class ContentServiceImpl implements ContentService {
+
+	@Override
+	public Iterable<Content> selectAll() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public Optional<Content> selectOneById(Integer id) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public void insertContent(Content content) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	@Override
+	public void updateContent(Content content) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	@Override
+	public void deleteContentById(Integer id) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+}

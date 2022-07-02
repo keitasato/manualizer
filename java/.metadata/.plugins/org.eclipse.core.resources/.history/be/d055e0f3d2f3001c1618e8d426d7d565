@@ -1,0 +1,17 @@
+package com.example.manualizer;
+
+import org.springframework.beans.factory.annotation.AutoWired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.example.manualizer.entity.Manual;
+import com.example.manualizer.repository.ManualRepository;
+
+@SpringBootApplication
+public class ManualizerApplication {
+	/** 起動メソッド */
+	public static void main(String[] args) {
+		SpringApplication.run(ManualizerApplication.class, args).getBean(ManualApplication.class).execute();
+	}
+
+}
