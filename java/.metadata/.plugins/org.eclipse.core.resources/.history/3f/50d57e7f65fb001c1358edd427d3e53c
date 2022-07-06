@@ -1,0 +1,5 @@
+package com.example.manualizer.service;
+
+public interface MemberService {
+
+}

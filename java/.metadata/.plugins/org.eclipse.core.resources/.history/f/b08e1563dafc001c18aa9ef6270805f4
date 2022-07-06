@@ -1,0 +1,112 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Manualizer</title>
+
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/custom.css}">
+    <link rel="stylesheet" th:href="@{css/mycustom.css}">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v6.1.1/css/all.css}">
+
+
+  </head>
+
+  <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="d-grid col-11 mx-auto my-2">
+        <div class="row">
+          <!-- ロゴ start -->
+          <div class="col-2">
+          	<form method="GET" th:action="@{/content}">
+          		<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+            </form>
+          </div>
+          <!-- ロゴ end -->
+
+          <!-- 検索 start -->
+          <div class="col-5">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="">
+              <a href="https://www.youtube.com/"><button class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search"></i></button></a>
+            </div>
+          </div>
+          <!-- 検索 end -->
+
+          <!-- 新規登録ボタン start -->
+          <div class="d-grid col-1">
+          	<form method="GET" th:action="@{/content/create}">
+          		<input type=submit value="新規作成" class="btn btn-success" role="button" aria-disabled="true">
+            </form>
+          </div>
+          <!-- 新規登録ボタン end -->
+          
+          <!-- ログインユーザ start -->
+          <div class="d-grid col-2">
+            <h6 th:text=${userName}>表示</h1>
+          </div>
+          <!-- ログインユーザ end -->
+          
+          <!-- ログアウトボタン start -->
+          <div class="d-grid col-1">
+          	<form th:action="@{/logout}" method="post">
+          		<input type=submit value="ログアウト" class="btn btn-danger" role="button" aria-disabled="true">
+            </form>
+          </div>
+          <!-- ログアウトボタン end -->
+
+        </div>
+      </div>   
+    </header>
+
+    <!-- メイン -->
+    <main>
+      <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
+
+        <!-- 検索結果 start -->
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-3 g-4 my-1">
+          
+          <div th:each="content : ${list}">
+          	<!-- カード start -->
+            <div class="col">
+              <div class="card border-success h-100">
+                <div class="card-body">          
+                  <h5 class="card-title" th:text="${content.title}">共通化</h5>
+                  <p class="card-text" th:text="${content.content}">作業開始前に共通化ルールに作成</p>
+                  <a th:href="@{content/show_{id}(id=${content.id})}" class="stretched-link"></a>
+                </div>
+              </div>
+            </div>
+            <!-- カード end -->
+          </div>
+
+          </div>
+        </div>
+        <!-- 検索結果 end -->
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer id="copyright" class="py-1 bg-dark text-light">
+      <div class="container text-center">
+        <!--コピーライト-->
+        <p>
+          <small>Copyright &copy;2022 Keita SATOU, All Rights Reserved.</small>
+        </p>
+      </div>
+
+    </footer>
+
+    <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
+    <script th:src="@{js/myVue.js}"></script>
+    <script defer th:src="@{https://use.fontawesome.com/releases/v6.1.1/js/all.js}"></script>
+
+  </body>
+
+</html>

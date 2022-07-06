@@ -1,0 +1,5 @@
+package com.example.manualizer.repository;
+
+public interface MemberRepository {
+
+}

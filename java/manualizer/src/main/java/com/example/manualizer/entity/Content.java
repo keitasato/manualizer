@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Content {
-	/** 識別IDE */
+	/** 識別ID */
 	@Id
 	private Integer id;
 	/** タイトル */

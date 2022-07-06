@@ -1,0 +1,4 @@
+insert into content
+(USER_ID, PASSWORD, REG_DATE, UPD_DATE)
+values
+('keita', 'password', now(), now());

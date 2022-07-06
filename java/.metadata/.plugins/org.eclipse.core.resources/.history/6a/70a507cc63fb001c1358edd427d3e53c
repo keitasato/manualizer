@@ -1,0 +1,12 @@
+package com.example.manualizer.dao;
+
+import javax.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.manualizer.entity.Member;
+
+/** Memberテーブルへのアクセスメソッドを呼び出すDao */
+public class MemberDao {
+
+}

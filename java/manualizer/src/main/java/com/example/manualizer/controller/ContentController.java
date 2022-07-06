@@ -5,6 +5,8 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,6 +60,12 @@ public class ContentController {
 		// 表示用Modelへの格納
 		model.addAttribute("list", list);
 		// model.addAttribute("pageTitle", "登録用フォーム");
+		
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String userName = auth.getName();
+		model.addAttribute("userName", userName);
 		
 		return "index";
 	}
