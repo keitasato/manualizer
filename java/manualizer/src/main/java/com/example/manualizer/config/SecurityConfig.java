@@ -15,8 +15,11 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.manualizer.service.MemberServiceImpl;
+import com.example.manualizer.service.MemberDetailsServiceImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+
+import com.example.manualizer.controller.RegisterController;
+import com.example.manualizer.service.MemberServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -42,6 +45,7 @@ public class SecurityConfig {
                 .mvcMatchers("/css/**").permitAll()
                 .mvcMatchers("/img/**").permitAll()
                 .mvcMatchers("/js/**").permitAll()
+                .mvcMatchers("/register/**").permitAll()
                 //.mvcMatchers("/").permitAll()
                 //.mvcMatchers("/general").hasRole("GENERAL")
                 //.mvcMatchers("/admin").hasRole("ADMIN")
@@ -61,11 +65,15 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 	*/
-    
 	
 	@Bean
-	public MemberServiceImpl customUserDetailsService() {
+	public MemberServiceImpl memberService() {
 		return new MemberServiceImpl();
+	}
+	
+	@Bean
+	public MemberDetailsServiceImpl customUserDetailsService() {
+		return new MemberDetailsServiceImpl();
 	}
 	
 	
