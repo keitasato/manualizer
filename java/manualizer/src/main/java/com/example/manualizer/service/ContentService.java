@@ -2,8 +2,12 @@ package com.example.manualizer.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.example.manualizer.entity.Content;
 
+@Service
+@EnableTransactionManagement
 /** Contentサービス処理 */
 public interface ContentService {
 	/** コンテンツ情報を全件取得 */

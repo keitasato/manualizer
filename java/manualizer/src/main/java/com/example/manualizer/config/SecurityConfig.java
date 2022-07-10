@@ -20,6 +20,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 
 import com.example.manualizer.controller.RegisterController;
 import com.example.manualizer.service.MemberServiceImpl;
+import com.example.manualizer.service.ContentServiceImpl;
+import com.example.manualizer.service.ContentService;
 
 @Configuration
 @EnableWebSecurity
@@ -65,6 +67,18 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 	*/
+	
+	/**
+	@Bean
+	public MemberServiceImpl memberServiceImplement() {
+		return new MemberServiceImpl();
+	}
+	*/
+	
+	@Bean
+	public ContentServiceImpl contentService() {
+		return new ContentServiceImpl();
+	}
 	
 	@Bean
 	public MemberServiceImpl memberService() {

@@ -16,5 +16,8 @@ public class MemberForm {
 	/** メールアドレス */
 	@NotBlank
 	private String username;
+	
+	@NotBlank
+	private String password;
 
 }

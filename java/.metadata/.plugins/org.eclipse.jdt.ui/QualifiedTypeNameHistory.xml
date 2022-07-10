@@ -15,4 +15,6 @@
     <fullyQualifiedTypeName name="com.example.manualizer.repository.MemberRepository"/>
     <fullyQualifiedTypeName name="com.example.manualizer.service.MemberService"/>
     <fullyQualifiedTypeName name="com.example.manualizer.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="org.springframework.transaction.annotation.EnableTransactionManagement"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.service.ContentServiceImpl"/>
 </qualifiedTypeNameHistroy>
