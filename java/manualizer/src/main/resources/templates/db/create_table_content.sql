@@ -4,5 +4,6 @@ create table content(
 	CONTENT text ,
 	REG_DATE date not null,
 	UPD_DATE date not null,
+	MAIN varchar(100) not null,
 	primary key (ID)
 );

@@ -76,10 +76,41 @@
     <main>
       <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
       
+      <!-- ユーザー名変更 start -->
+      <!-- bootstrap container start -->
+          <form method="POST" th:action="@{/account/nickname_change}"> 
+	        <div class="container pb-2 border-bottom border-secondary">
+	        
+	            <div class="row my-3 mb-3">
+		            <div class="col-5 mx-auto">
+		            	<h4 class="my-1 text-center">ユーザー名変更</h4>
+		           	</div>
+	           	</div>
+	           	
+	           	<!-- ニックネーム start -->
+	            <div class="col-5 mx-auto">
+		            <div class="input-group">
+		              <input type="text" name="nickname" class="form-control text-center my-1" placeholder="ユーザー名">
+		            </div>
+	          	</div>
+	            <!-- ニックネーム end -->
+	
+				<div class="row my-3 mb-3">
+	                <!-- アカウント削除 start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-secondary" value="ユーザー名変更" role="button" aria-disabled="true">
+	                </div>
+	                <!-- アカウント削除 end -->
+	
+	            </div>
+	          </div>
+	          </form>
+	        <!-- bootstrap container end -->
+	        <!-- ユーザー名変更 end -->
+      
       	<!-- パスワード入力 start -->
         <form method="POST" th:action="@{/account/password_change}"> 
         
-
 	        <!-- bootstrap container start -->
 	        <div class="container pb-2 border-bottom border-secondary">
 	          <div class="row my-1">

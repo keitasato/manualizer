@@ -35,4 +35,7 @@ public class Member {
 	/** 更新日時 */
 	@Column(name = "upd_date")
 	private Date upd_date;
+	/** ニックネーム */
+	@Column(name = "nickname")
+	private String nickname;
 }

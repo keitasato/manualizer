@@ -6,4 +6,5 @@ import com.example.manualizer.entity.Content;
 
 /** Manualテーブル : RepositoryImpl */
 public interface ContentRepository extends JpaRepository<Content, Integer>{
+	void deleteByMail(String mail);
 }

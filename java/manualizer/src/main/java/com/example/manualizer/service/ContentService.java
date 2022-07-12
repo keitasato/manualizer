@@ -24,5 +24,8 @@ public interface ContentService {
 	
 	/** コンテンツ情報を削除 */
 	void deleteContentById(Integer id);
+	
+	/** ユーザの全コンテンツ情報を削除 */
+	void deleteContentByMail(String mail);
 
 }

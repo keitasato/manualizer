@@ -5,6 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 
 import java.text.SimpleDateFormat;
 
@@ -24,6 +27,7 @@ import java.util.Date;
 public class Content {
 	/** 識別ID */
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 	/** タイトル */
@@ -38,5 +42,8 @@ public class Content {
 	/** 更新日時 */
 	@Column(name = "upd_date")
 	private Date upd_date;
+	/** メールアドレス(ユーザID) */
+	@Column(name = "mail")
+	private String mail;
 	
 }

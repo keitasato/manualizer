@@ -1,0 +1,198 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Manualizer : UPDATE</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/mycustom.css}">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v6.1.1/css/all.css}">
+
+
+  </head>
+
+  <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="d-grid col-11 mx-auto my-2">
+        <div class="row">
+          <!-- ロゴ start -->
+          <div class="col-2">
+            <form method="GET" th:action="@{/content}">
+          		<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+            </form>
+          </div>
+          <!-- ロゴ end -->
+
+          <!-- 検索 start -->
+          <div class="col-8">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="">
+              <a href="https://www.youtube.com/"><button class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search"></i></button></a>
+            </div>
+          </div>
+          <!-- 検索 end -->
+
+          <!-- 新規登録ボタン start -->
+          <div class="d-grid col-1">
+          	<form method="GET" th:action="@{/content/create}">
+            	<input type=submit value="新規作成" class="btn btn-success" role="button" aria-disabled="true">
+            </form>
+          </div>
+          <!-- 新規登録ボタン end -->
+          
+          <!-- ログアウトボタン start -->
+          <!--div class="d-grid col-1">
+          	<form th:action="@{/logout}" method="post">
+          		<input type=submit value="ログアウト" class="btn btn-danger" role="button" aria-disabled="true">
+            </form>
+          </div-->
+          <!-- ログアウトボタン end -->
+          
+          <!-- アカウントドロップダウン start -->
+          <div class="d-grid col-1">
+          	<div class="dropdown">
+			  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+			    アカウント
+			  </a>
+			
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+			  	<li style="font-size:80%" class="mx-3 border-bottom"><p th:text="|Signed in ${#authentication.principal.Username}"|></p></li>
+			  	<li><form method="GET" th:action="@{/account/edit}"><button class="dropdown-item text-center" type="submit">編集</button></form></li>
+			    <li><a class="dropdown-item text-center" th:href="@{/logout}">ログアウト</a></li>
+			  </ul>
+			</div>
+          </div>
+          <!-- アカウントドロップダウン end -->
+
+        </div>
+      </div>   
+    </header>
+
+    <!-- メイン -->
+    <main>
+      <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
+      
+      <!-- ユーザー名変更 start -->
+      <!-- bootstrap container start -->
+          <form method="POST" th:action="@{/account/nickname_change}"> 
+	        <div class="container">
+	            <div class="row my-3 mb-3">
+		            <div class="col-5 mx-auto">
+		            	<h4 class="my-1 text-center">ユーザー名変更</h4>
+		           	</div>
+	           	</div>
+	           	
+	           	<!-- ニックネーム start -->
+	            <div class="col-5 mx-auto">
+		            <div class="input-group">
+		              <input type="text" name="nickname" class="form-control text-center my-1" placeholder="ユーザー名">
+		            </div>
+	          	</div>
+	            <!-- ニックネーム end -->
+	
+				<div class="row my-3 mb-3">
+	                <!-- アカウント削除 start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-secondary" value="ユーザー名変更" role="button" aria-disabled="true">
+	                </div>
+	                <!-- アカウント削除 end -->
+	
+	            </div>
+	          </div>
+	          </form>
+	        <!-- bootstrap container end -->
+	        <!-- ユーザー名変更 end -->
+      
+      	<!-- パスワード入力 start -->
+        <form method="POST" th:action="@{/account/password_change}"> 
+        
+	        <!-- bootstrap container start -->
+	        <div class="container pb-2 border-bottom border-secondary">
+	          <div class="row my-1">
+	            <!-- パスワード start -->
+	            <div class="col-5 mx-auto">
+	            
+		            <h4 class="my-1 text-center">パスワード変更</h4>
+	            	
+		        	<div class="input-group">
+		              <input type="password" name="password" class="form-control text-center my-1" placeholder="新規パスワード">
+		            </div>
+	          	</div>
+	            <!-- パスワード end -->
+	          </div>
+	          
+	          <div class="row my-1">
+	          <!-- パスワード start -->
+	            <div class="col-5 mx-auto">
+	            	
+		            <div class="input-group">
+		              <input type="password" name="password_check" class="form-control text-center my-1" placeholder="新規パスワード(確認用)">
+		            </div>
+	          	</div>
+	            <!-- パスワード end -->
+	            
+	            <div class="row my-1">
+	
+	                <!-- 送信ボタン start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-secondary" value="パスワード変更" role="button" aria-disabled="true">
+	                </div>
+	                <!-- 送信ボタン end -->
+	
+	            </div>
+	            
+	          </div>
+	          
+	          
+	        </div>
+	        <!-- bootstrap container end -->
+          </form>
+          <!-- パスワード入力 end -->
+          
+          <!-- bootstrap container start -->
+          <form method="POST" th:action="@{/account/delete}"> 
+	        <div class="container">
+	            <div class="row my-3 mb-3">
+		            <div class="col-5 mx-auto">
+		            	<h4 class="my-1 text-center">アカウント削除</h4>
+		           	</div>
+	           	</div>
+	
+				<div class="row my-3 mb-3">
+	                <!-- アカウント削除 start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-danger" value="アカウント削除" role="button" aria-disabled="true">
+	                </div>
+	                <!-- アカウント削除 end -->
+	
+	            </div>
+	          </div>
+	          </form>
+	        <!-- bootstrap container end -->
+	        
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer id="copyright" class="py-1 bg-dark text-light">
+      <div class="container text-center">
+        <!--コピーライト-->
+        <p>
+          <small>Copyright &copy;2022 Keita SATOU, All Rights Reserved.</small>
+        </p>
+      </div>
+
+    </footer>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
+	<script th:src="@{/js/myVue.js}"></script>
+	<script defer th:src="@{https://use.fontawesome.com/releases/v6.1.1/js/all.js}"></script>
+
+  </body>
+  
+</html>

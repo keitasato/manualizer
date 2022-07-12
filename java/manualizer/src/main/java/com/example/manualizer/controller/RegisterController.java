@@ -108,16 +108,24 @@ public class RegisterController {
 		TextEncryptor encryptor3 = Encryptors.text(secret, salt);
 		String mail = encryptor3.decrypt(secretMail);
 		model.addAttribute("mail", mail);
+		
+		if (service.existsByUsername(mail)) {
+			redirectAttributes.addFlashAttribute("decomplete", mail + "は既に登録されています");
+			return "redirect:/login";
+		}
+		
 		return "password";
 	}
 	
 	@PostMapping("/done")
 	public String done(@Validated MemberForm memberForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		String mail = memberForm.getUsername();
+		String nickname = memberForm.getNickname();
 		String password = memberForm.getPassword();
 		
 		Member member = new Member();
 		member.setMail(mail);
+		member.setNickname(nickname);
 		member.setPassword(password);
 		// 日付をEntityへ格納
 		Date date = new Date();

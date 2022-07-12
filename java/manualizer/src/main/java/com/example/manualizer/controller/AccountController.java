@@ -29,6 +29,7 @@ import com.example.manualizer.entity.Member;
 import com.example.manualizer.form.PasswordChangeForm;
 import com.example.manualizer.form.MemberForm;
 import com.example.manualizer.service.MemberService;
+import com.example.manualizer.service.ContentService;
 
 /** Account コントローラ */
 @Controller
@@ -38,6 +39,8 @@ public class AccountController {
 	/** DI対象 */
 	@Autowired
 	MemberService service;
+	@Autowired
+	ContentService contentService;
 	@Autowired
 	MailSender mailSender;
 	
@@ -93,6 +96,41 @@ public class AccountController {
 			return "edit";
 		}
 	}
+
+	/** idをKeyにしてパスワードを更新する */
+	@PostMapping("nickname_change")
+	public String nickname_change(@Validated PasswordChangeForm passwordForm, BindingResult bindingResult,
+			Model model, RedirectAttributes redirectAttributes) {
+		// コンテンツ情報を1件更新してリダイレクト
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String mail = auth.getName();
+		String nickname = passwordForm.getNickname();
+		//String password = passwordForm.getPassword();
+		//String password_check = passwordForm.getPassword_check();
+		
+		Optional<Member> memberOpt = service.selectOneByMail(mail);
+		if (memberOpt.isPresent()) {
+			Member member = memberOpt.get();
+			member.setMail(mail);
+			member.setNickname(nickname);
+			
+			// 日付をEntityへ格納
+			Date date = new Date();
+			long timeInMilliSeconds = date.getTime();
+			java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+			member.setUpd_date(date);
+			
+			service.updateMember(member);
+			
+			redirectAttributes.addFlashAttribute("updcomplete", "更新が完了しました");
+			return "redirect:/content";
+		} else {
+			// redirectAttributes.addFlashAttribute("updcomplete", "更新に失敗しました");
+			return "edit";
+		}
+	}
 	
 	/** EmailをKeyにしてデータを削除する */
 	/** http://localhost:8080/account/delete にPOSTでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
@@ -104,6 +142,7 @@ public class AccountController {
 		//Principalからログインユーザの情報を取得
 		String mail = auth.getName();
 		service.deleteMemberByMail(mail);
+		contentService.deleteContentByMail(mail);
 		redirectAttributes.addFlashAttribute("delcomplete", "削除が完了しました");
 		return "login";
 	}

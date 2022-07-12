@@ -39,5 +39,10 @@ public class ContentServiceImpl implements ContentService {
 	public void deleteContentById(Integer id) {
 		repository.deleteById(id);
 	}
+	
+	@Override
+	public void deleteContentByMail(String mail) {
+		repository.deleteByMail(mail);
+	}
 
 }
