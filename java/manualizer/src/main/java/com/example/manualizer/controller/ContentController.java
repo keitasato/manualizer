@@ -77,7 +77,6 @@ public class ContentController {
 			int length = explain.length();
 			if(length >= maxLength) {
 				int cut = Math.min(length, maxLength);
-				//content.setContent(content.getContent().substring(0, cut) + "...");
 				addContent.setContent(explain.substring(0, cut) + "...");
 			}else {
 				addContent.setContent(explain);
@@ -87,18 +86,62 @@ public class ContentController {
 			addContent.setMail(member.getNickname());
 			
 			result.add(addContent);
-			//content.setMail(nickname);
 			
 		}
 		
 		// 表示用Modelへの格納
-		model.addAttribute("list", list);
+		model.addAttribute("list", result);
+		
+		return "index";
+	}
+	
+	/** Contentを新規登録 */
+	/** http://localhost:8080/content/myManual にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
+	@GetMapping("myManual")
+	public String myManual(Model model, RedirectAttributes redirectAttributes) {
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String mail = auth.getName();
+		model.addAttribute("userName", mail);
+		
+		// コンテンツの一覧を取得
+		Iterable<Content> list = service.selectAllbyMail(mail);
+		List<Content> result = new ArrayList<Content>();
+		
+		// カードに表示する説明文を２０文字以下に抑える
+		// メールアドレスの代わりにニックネームを格納する
+		int maxLength =25;
+		for (Content content : list) {
+			Content addContent = new Content();
+			
+			addContent.setTitle(content.getTitle());
+			addContent.setId(content.getId());
+			
+			String explain = content.getContent();
+			int length = explain.length();
+			if(length >= maxLength) {
+				int cut = Math.min(length, maxLength);
+				addContent.setContent(explain.substring(0, cut) + "...");
+			}else {
+				addContent.setContent(explain);
+			}
+			Optional<Member> memberOpt = memberService.selectOneByMail(content.getMail());
+			Member member = memberOpt.get();
+			addContent.setMail(member.getNickname());
+			
+			result.add(addContent);
+		}
+		
+		// 表示用Modelへの格納
+		//model.addAttribute("list", list);
 		model.addAttribute("list", result);
 		// model.addAttribute("pageTitle", "登録用フォーム");
 		
-		
-		
-		return "index";
+		System.out.println("fire");
+		//redirectAttributes.addFlashAttribute("list", result);
+		//return "redirect:/content";
+		return "myManual";
 	}
 	
 	/** Contentを新規登録 */
@@ -149,14 +192,22 @@ public class ContentController {
 	/** http://localhost:8080/content/show にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
 	@GetMapping("/show_{id}")
 	public String show(@PathVariable Integer id, Model model) {
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String mail = auth.getName();
+		
 		// Contentを取得(Optionalでラップ)
 		Optional<Content> contentOpt = service.selectOneById(id);
 		if (contentOpt.isPresent()) {
 			Content content = contentOpt.get();
 			model.addAttribute("content", content);
+			
+			// 自分の作成したマニュアルか否かのフラグ
+			boolean own = content.getMail().equals(mail);
+			model.addAttribute("own", own);
 		}
-		// 表示用Modelへの格納
-		// Content content = makeContent(contentForm);
+		
 		return "show";
 	}
 	

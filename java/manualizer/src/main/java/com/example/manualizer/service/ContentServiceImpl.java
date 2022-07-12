@@ -44,5 +44,10 @@ public class ContentServiceImpl implements ContentService {
 	public void deleteContentByMail(String mail) {
 		repository.deleteByMail(mail);
 	}
+	
+	@Override
+	public Iterable<Content> selectAllbyMail(String mail){
+		return repository.findAllByMail(mail);
+	}
 
 }

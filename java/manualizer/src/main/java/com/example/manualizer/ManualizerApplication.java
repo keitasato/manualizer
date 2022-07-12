@@ -19,7 +19,6 @@ public class ManualizerApplication {
 	/** 起動メソッド */
 	public static void main(String[] args) {
 		SpringApplication.run(ManualizerApplication.class, args);
-		// SpringApplication.run(ManualizerApplication.class, args).getBean(ManualizerApplication.class).execute();
 	}
 	
 }

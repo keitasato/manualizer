@@ -27,5 +27,8 @@ public interface ContentService {
 	
 	/** ユーザの全コンテンツ情報を削除 */
 	void deleteContentByMail(String mail);
+	
+	/** ユーザのコンテンツ情報を全件取得 */
+	Iterable<Content> selectAllbyMail(String mail);
 
 }
