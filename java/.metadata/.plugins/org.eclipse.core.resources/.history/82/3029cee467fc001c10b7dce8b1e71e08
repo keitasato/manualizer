@@ -1,0 +1,43 @@
+package com.example.manualizer.dao;
+
+import javax.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.manualizer.entity.Member;
+
+import org.springframework.context.annotation.Bean;
+
+/** Memberテーブルへのアクセスメソッドを呼び出すDao */
+// Spring SecurityのJdbsDaoImplは、UserDetailsServiceを実装する
+// JDBCを使用して取得されるユーザ名/パスワードベースの認証をサポートする
+// JdbcUserDetailsManagerはJdbcDaoImplを継承して、UserDetailsManagerインターフェースを介したUserDetailsの管理を提供する
+// UserDetailsベースの認証は、Spring Securityが認証のためにユーザ名/パスワードを受け入れる構成の場合に利用される。
+
+public class MemberDao {
+	/**
+	@Autowired
+	EntityManager em;
+	*/
+	
+	@Bean
+	EntityManager em() {
+		return new EntityManager();
+	};
+	
+	/**
+	 * フォームの入力値から該当するユーザを検索 合致するものが無い場合Nullが返される
+	 * @param mail
+	 * @return 一致するユーザが存在するとき:MemberEntity、存在しないとき:Null
+	 */
+	@Bean
+	public Member findUser(String mail) {
+		String query = "";
+		query += "SELECT * ";
+		query += "FROM member ";
+		query += "WHERE mail = :mail "; //setParameterで引数の値を代入できるようにNamedParameterを使用
+		
+		// EntityManagerで取得された結果はオブジェクトなので、Member型へキャストが必要
+		return (Member)em.createNativeQuery(query, Member.class).setParameter("mail", mail).getSingleResult();
+	}
+}

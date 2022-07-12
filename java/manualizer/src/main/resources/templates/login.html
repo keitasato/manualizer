@@ -1,0 +1,121 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Manualizer : LOGIN</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/mycustom.css}">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v6.1.1/css/all.css}">
+
+
+  </head>
+
+  <body>
+
+    <!-- メイン -->
+    <main>
+      <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
+      
+      	<!-- bootstrap container start -->
+	    <div class="container">
+	     	<div class="row my-1">
+          	<!-- ロゴ start -->
+	          	<div class="col-2 mx-auto">
+	          		<form method="GET" th:action="@{/content}">
+	          			<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+	            	</form>
+	          	</div>
+	          	<!-- ロゴ end -->
+	         </div>
+	     </div>
+          	
+      
+        <!-- ログインフォーム start -->
+        <form method="POST" th:action="@{/sign_in}"> 
+
+	        <!-- bootstrap container start -->
+	        <div class="container">
+	          <div class="row my-1">
+
+	            <!-- ユーザ名 start -->
+	            <div class="col-5 mx-auto">
+	            <div class="input-group">
+	              <input type="text" name="username" class="form-control text-center my-1" placeholder="メールアドレス">
+	            </div>
+	          </div>
+	            <!-- ユーザ名 end -->
+	          </div>
+	          
+	          <div class="row my-1">
+	            
+	            <!-- パスワード start -->
+	            <div class="col-5 mx-auto">
+	            <div class="input-group">
+	              <input type="password" name="password" class="form-control text-center my-1" placeholder="パスワード">
+	            </div>
+	          </div>
+	            <!-- パスワード end -->
+	
+	          </div>
+	        </div>
+	        <!-- bootstrap container end -->
+	
+	        <!-- bootstrap container start -->
+	        <div class="container">
+	            <div class="row my-1">
+	
+	                <!-- 登録ボタン start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-success" value="ログイン" role="button" aria-disabled="true">
+	                </div>
+	                <!-- 登録ボタン end -->
+	
+	            </div>
+	          </div>
+	          <!-- bootstrap container end -->
+          
+          </form>
+          <!-- ログインフォーム end -->
+          
+          
+
+	        <!-- bootstrap container start -->
+	        <div class="container">
+	          <div class="row my-1">
+
+	            <!-- ユーザ名 start -->
+	            <div class="d-grid col-5 mx-auto">
+	              <a th:href="@{/register/signup}" class="link-primary text-center">アカウント作成</a>
+	          	</div>
+	            <!-- ユーザ名 end -->
+	          </div>
+	          
+	        </div>
+	        <!-- bootstrap container end -->
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer id="copyright" class="py-1 bg-dark text-light">
+      <div class="container text-center">
+        <!--コピーライト-->
+        <p>
+          <small>Copyright &copy;2022 Keita SATOU, All Rights Reserved.</small>
+        </p>
+      </div>
+
+    </footer>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
+	<script th:src="@{/js/myVue.js}"></script>
+	<script defer th:src="@{https://use.fontawesome.com/releases/v6.1.1/js/all.js}"></script>
+
+  </body>
+  
+</html>

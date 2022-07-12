@@ -8,4 +8,13 @@
     <fullyQualifiedTypeName name="com.example.manualizer.entity.Content"/>
     <fullyQualifiedTypeName name="com.example.manualizer.form.ContentForm"/>
     <fullyQualifiedTypeName name="com.example.manualizer.service.ContentService"/>
+    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.builders.WebSecurity"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.repository.ManualRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.config.JpaRepositoryConfigExtension"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.entity.Member"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.repository.MemberRepository"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.service.MemberService"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="org.springframework.transaction.annotation.EnableTransactionManagement"/>
+    <fullyQualifiedTypeName name="com.example.manualizer.service.ContentServiceImpl"/>
 </qualifiedTypeNameHistroy>

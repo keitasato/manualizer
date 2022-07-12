@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.manualizer.entity.Content;
-import com.example.manualizer.repository.ManualRepository;
+import com.example.manualizer.repository.ContentRepository;
 
-@Service
 @Transactional
 public class ContentServiceImpl implements ContentService {
 	/** Repository 注入 */
 	@Autowired
-	ManualRepository repository;
+	ContentRepository repository;
 
 	@Override
 	public Iterable<Content> selectAll() {
