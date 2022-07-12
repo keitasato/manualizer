@@ -1,0 +1,1 @@
+/java/manualizer/src/main/resources/application.properties

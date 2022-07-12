@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="spring-boot-starter-web"/>
 			<item value="Dao"/>
 			<item value="EntityManager"/>
 			<item value="spring-boot-starter-security"/>
@@ -15,7 +16,6 @@
 			<item value="hidden"/>
 			<item value="button"/>
 			<item value="id"/>
-			<item value="title"/>
 		</list>
 		<list key="replacehistory">
 		</list>

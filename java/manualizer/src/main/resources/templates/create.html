@@ -45,12 +45,28 @@
           <!-- 新規登録ボタン end -->
           
           <!-- ログアウトボタン start -->
-          <div class="d-grid col-1">
+          <!--div class="d-grid col-1">
           	<form th:action="@{/logout}" method="post">
           		<input type=submit value="ログアウト" class="btn btn-danger" role="button" aria-disabled="true">
             </form>
-          </div>
+          </div-->
           <!-- ログアウトボタン end -->
+          
+          <!-- アカウントドロップダウン start -->
+          <div class="d-grid col-1">
+          	<div class="dropdown">
+			  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+			    アカウント
+			  </a>
+			
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+			  	<li style="font-size:80%" class="mx-3 border-bottom"><p th:text="|Signed in ${#authentication.principal.Username}"|></p></li>
+			  	<li><a class="dropdown-item text-center" th:href="@{/register/edit}">編集</a></li>
+			    <li><a class="dropdown-item text-center" th:href="@{/logout}">ログアウト</a></li>
+			  </ul>
+			</div>
+          </div>
+          <!-- アカウントドロップダウン end -->
 
         </div>
       </div>   

@@ -23,11 +23,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 
-import com.example.manualizer.entity.Content;
 import com.example.manualizer.entity.Member;
-import com.example.manualizer.form.ContentForm;
 import com.example.manualizer.form.MemberForm;
-import com.example.manualizer.service.ContentService;
 import com.example.manualizer.service.MemberService;
 
 /** Register コントローラ */
@@ -142,9 +139,6 @@ public class RegisterController {
 		
 		return "/login";
 	}
-	
-	
-	
 	
 
 }
