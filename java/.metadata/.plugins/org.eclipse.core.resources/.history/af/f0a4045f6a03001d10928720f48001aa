@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8">
+    <title>footer : fragment</title>
+  </head>
+  
+    <!-- bootstrap container start -->
+	<!-- ロゴ start -->
+	<div class="container" th:fragment="logo">
+	 	<div class="row my-1">
+	      	<div class="col-2 mx-auto">
+	      		<form method="GET" th:action="@{/content}">
+	      			<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+	        	</form>
+	      	</div>
+	     </div>
+	 </div>
+	 <!-- ロゴ end -->
+	 <!-- bootstrap container end -->
+	 
+            
+    <!-- 誰が start -->
+    <div th:fragment="show_content(subTitle, subContent)">
+    	<div class="row my-1">
+		    <div class="col-2 mx-auto" >
+		        <p th:text="${subTitle}" class="wf-sawarabimincho text-center show-sub-content"></p>
+		    </div>  
+		    <div class="col-8 mx-auto" >
+		        <p th:text="${subContent}" class="wf-sawarabimincho text-center show-sub-content"></p>
+		    </div>
+	    </div>
+    </div>
+    <!-- 誰が end -->
+    
+
+          
+	 
+
+  
+</html>
+    

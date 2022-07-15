@@ -1,0 +1,73 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8">
+    <title>header : fragment</title>
+  </head>
+
+  <body>
+    <!-- ヘッダー -->
+    <header th:fragment="header(search_action)">
+      <div class="d-grid col-11 mx-auto my-2" th:fragment="header">
+        <div class="row">
+          <!-- ロゴ start -->
+          <div class="col-2">
+          	<form method="GET" th:action="@{/content}">
+          		<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+            </form>
+          </div>
+          <!-- ロゴ end -->
+
+          <!-- 検索 start -->
+          <div class="col-8">
+            <div class="input-group">
+              <form th:action="|content/${search_action}|" method="post">
+              <div class="form-group">
+              	<input type="text" name="keyword" class="form-control" placeholder="">
+              	<button class="btn btn-outline-success form-control" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+              	</div>
+              </form>
+            </div>
+          </div>
+          <!-- 検索 end -->
+
+          <!-- 新規登録ボタン start -->
+          <div class="d-grid col-1">
+          	<form method="GET" th:action="@{/content/create}">
+          		<input type=submit value="新規作成" class="btn btn-success" role="button" aria-disabled="true">
+            </form>
+          </div>
+          <!-- 新規登録ボタン end -->
+          
+          <!-- ログアウトボタン start -->
+          <!--div class="d-grid col-1">
+          	<form th:action="@{/logout}" method="post">
+          		<input type=submit value="ログアウト" class="btn btn-danger" role="button" aria-disabled="true">
+            </form>
+          </div-->
+          <!-- ログアウトボタン end -->
+          
+          <!-- アカウントドロップダウン start -->
+          <div class="d-grid col-1">
+          	<div class="dropdown">
+			  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+			    アカウント
+			  </a>
+			
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+			  	<li style="font-size:80%" class="mx-3 border-bottom"><p th:text="|Signed in ${#authentication.principal.Username}"|></p></li>
+			  	<li><form method="GET" th:action="@{/content/myManual}"><button class="dropdown-item text-center" type="submit">マイマニュアル</button></form></li>
+			  	<li><form method="GET" th:action="@{/account/edit}"><button class="dropdown-item text-center" type="submit">アカウント編集</button></form></li>
+			    <li><a class="dropdown-item text-center" th:href="@{/logout}">ログアウト</a></li>
+			  </ul>
+			</div>
+          </div>
+          <!-- アカウントドロップダウン end -->
+          
+        </div>
+      </div>   
+    </header>
+        
+    </body>
+</html>
+    

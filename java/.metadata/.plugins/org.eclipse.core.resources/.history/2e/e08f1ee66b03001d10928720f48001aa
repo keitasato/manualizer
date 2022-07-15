@@ -1,0 +1,99 @@
+@charset "UTF-8";
+/* ページ内リンクの位置調整 */
+section {
+    margin-top: -60px;
+    padding-top: 60px;
+}
+
+/* Google Font */
+.wf-sawarabimincho {
+	 font-family: "Sawarabi Mincho"; 
+	 font-size: x-large;
+	}
+
+.oswald {
+	font-family: 'Oswald', sans-serif;
+}
+
+
+/* aタグのスタイル */
+.textlink a {
+	position: relative;
+	color: #333;
+	text-decoration: none;
+}
+.textlink a:hover {
+	color: #b99b00;
+}
+
+.textlink02 a::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: #ceb849;
+	transition: width 0.3s;
+}
+
+.textlink02 a:hover::after {
+	width: 100%;
+}
+
+.flow a {
+    padding: 0 10px;
+    color: #333;
+	text-decoration: none;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 50%);
+    background-position: 0 0;
+    background-size: 200% auto;
+    transition: .3s;
+}
+  
+.flow a:hover {
+    background-position: -100% 0;
+    color: #fff;
+}
+
+.logo-container {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.body-background-color{
+	background-color: rgba(30, 30, 30, 0.15);
+}
+
+.table-background-color{
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.a.widelink { display: block; }
+
+.show-title {
+	padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+	color: #494949;/*文字色*/
+	background: #f4f4f4;/*背景色*/
+	border-left: solid 5px #28a745;/*左線*/
+	border-right: solid 5px #28a745;/*左線*/
+	border-bottom: solid 3px #d7d7d7;/*下線*/
+  }
+ 
+.show-sub-title {
+  color: #000000;/*文字色*/
+  font-size: x-large;
+  border-top: solid 3px #28a745;/*上線*/
+  border-bottom: solid 3px #28a745;/*下線*/
+}
+
+.show-sub-content {
+	padding: 0.1em;/*文字の上下 左右の余白*/
+	color: #494949;/*文字色*/
+	background: #f4f4f4;/*背景色*/
+	border-left: solid 1px #28a745;/*左線*/
+	border-right: solid 1px #28a745;/*左線*/
+	border-bottom: solid 1px #d7d7d7;/*下線*/
+  }

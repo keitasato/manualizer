@@ -1,6 +1,7 @@
 package com.example.manualizer.service;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -12,6 +13,10 @@ import com.example.manualizer.entity.Content;
 public interface ContentService {
 	/** コンテンツ情報を全件取得 */
 	Iterable<Content> selectAll();
+	
+	//Iterable<Content> selectAllLike(String keyword);
+	
+	Iterable<Content> selectAllByTitleLike(String keyword); 
 	
 	/** コンテンツ情報をidをキーに１件取得 */
 	Optional<Content> selectOneById(Integer id);
@@ -30,5 +35,7 @@ public interface ContentService {
 	
 	/** ユーザのコンテンツ情報を全件取得 */
 	Iterable<Content> selectAllbyMail(String mail);
+	
+	void copyContent(Content from, Content to);
 
 }

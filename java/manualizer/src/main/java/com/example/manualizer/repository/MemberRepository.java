@@ -1,6 +1,5 @@
 package com.example.manualizer.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import com.example.manualizer.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 

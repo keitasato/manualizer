@@ -19,14 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.example.manualizer.entity.Content;
 import com.example.manualizer.entity.Member;
 import com.example.manualizer.form.ContentForm;
 import com.example.manualizer.service.ContentService;
 import com.example.manualizer.service.MemberService;
+import com.example.manualizer.form.SearchForm;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -50,43 +48,38 @@ public class ContentController {
 	
 	/** Contentの一覧を表示 */
 	/** http://localhost:8080/content/ にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
-	@GetMapping
-	public String showList(ContentForm contentForm, Model model) {
-		
+	@GetMapping("")
+	public String showList(Model model) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
 		String mail = auth.getName();
-		model.addAttribute("userName", mail);
 		
 		// コンテンツの一覧を取得
 		Iterable<Content> list = service.selectAll();
 		List<Content> result = new ArrayList<Content>();
 		
-		
 		// カードに表示する説明文を２０文字以下に抑える
 		// メールアドレスの代わりにニックネームを格納する
-		int maxLength =25;
+		int maxLength =20;
 		for (Content content : list) {
 			Content addContent = new Content();
 			
-			addContent.setTitle(content.getTitle());
-			addContent.setId(content.getId());
+			service.copyContent(content, addContent);
 			
 			String explain = content.getContent();
 			int length = explain.length();
-			if(length >= maxLength) {
-				int cut = Math.min(length, maxLength);
-				addContent.setContent(explain.substring(0, cut) + "...");
-			}else {
-				addContent.setContent(explain);
-			}
+			int cut = Math.min(length, maxLength);
+			
+			if(length >= maxLength) addContent.setContent(explain.substring(0, cut) + "...");
+			else addContent.setContent(explain);
+			
+			// コンテンツの作成者のニックネームを表示用に格納
 			Optional<Member> memberOpt = memberService.selectOneByMail(content.getMail());
 			Member member = memberOpt.get();
 			addContent.setMail(member.getNickname());
 			
 			result.add(addContent);
-			
 		}
 		
 		// 表示用Modelへの格納
@@ -95,37 +88,38 @@ public class ContentController {
 		return "index";
 	}
 	
-	/** Contentを新規登録 */
-	/** http://localhost:8080/content/myManual にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
-	@GetMapping("myManual")
-	public String myManual(Model model, RedirectAttributes redirectAttributes) {
+	/** 検索ワードに合致するContentの一覧を表示 */
+	/** http://localhost:8080/content/ にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
+	@PostMapping("search")
+	public String showSearchList(@Validated SearchForm searchForm, BindingResult bindingResult, Model model) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
 		String mail = auth.getName();
-		model.addAttribute("userName", mail);
+		System.out.println("searching");
+		System.out.println(searchForm.getKeyword());
 		
 		// コンテンツの一覧を取得
-		Iterable<Content> list = service.selectAllbyMail(mail);
+		//Iterable<Content> list = service.selectAllLike(form.getKeyword());
+		Iterable<Content> list = service.selectAllByTitleLike("%"+searchForm.getKeyword()+"%");
 		List<Content> result = new ArrayList<Content>();
 		
 		// カードに表示する説明文を２０文字以下に抑える
 		// メールアドレスの代わりにニックネームを格納する
-		int maxLength =25;
+		int maxLength =20;
 		for (Content content : list) {
 			Content addContent = new Content();
 			
-			addContent.setTitle(content.getTitle());
-			addContent.setId(content.getId());
+			service.copyContent(content, addContent);
 			
 			String explain = content.getContent();
 			int length = explain.length();
-			if(length >= maxLength) {
-				int cut = Math.min(length, maxLength);
-				addContent.setContent(explain.substring(0, cut) + "...");
-			}else {
-				addContent.setContent(explain);
-			}
+			int cut = Math.min(length, maxLength);
+			
+			if(length >= maxLength) addContent.setContent(explain.substring(0, cut) + "...");
+			else addContent.setContent(explain);
+			
+			// コンテンツの作成者のニックネームを表示用に格納
 			Optional<Member> memberOpt = memberService.selectOneByMail(content.getMail());
 			Member member = memberOpt.get();
 			addContent.setMail(member.getNickname());
@@ -134,13 +128,47 @@ public class ContentController {
 		}
 		
 		// 表示用Modelへの格納
-		//model.addAttribute("list", list);
 		model.addAttribute("list", result);
-		// model.addAttribute("pageTitle", "登録用フォーム");
 		
-		System.out.println("fire");
-		//redirectAttributes.addFlashAttribute("list", result);
-		//return "redirect:/content";
+		return "index";
+	}
+	
+	
+	/** ログインユーザのContentの一覧を表示 */
+	/** http://localhost:8080/content/myManual にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
+	@GetMapping("myManual")
+	public String myManual(Model model, RedirectAttributes redirectAttributes) {
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String mail = auth.getName();
+		
+		// コンテンツの一覧を取得
+		Iterable<Content> list = service.selectAllbyMail(mail);
+		List<Content> result = new ArrayList<Content>();
+		
+		// カードに表示する説明文を２０文字以下に抑える
+		// メールアドレスの代わりにニックネームを格納する
+		int maxLength =20;
+		for (Content content : list) {
+			Content addContent = new Content();
+			
+			service.copyContent(content, addContent);
+			
+			String explain = content.getContent();
+			int length = explain.length();
+			int cut = Math.min(length, maxLength);
+			if(length >= maxLength) addContent.setContent(explain.substring(0, cut) + "...");
+			else addContent.setContent(explain);
+			Optional<Member> memberOpt = memberService.selectOneByMail(content.getMail());
+			Member member = memberOpt.get();
+			addContent.setMail(member.getNickname());
+			
+			result.add(addContent);
+		}
+		
+		model.addAttribute("list", result);
+		
 		return "myManual";
 	}
 	
@@ -148,25 +176,23 @@ public class ContentController {
 	/** http://localhost:8080/content/create にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
 	@GetMapping("create")
 	public String create(Model model) {
-		// 表示用Modelへの格納
-		model.addAttribute("msg", "Keita!!!");
 		return "create";
 	}
 	
 	/** Contentデータを1件挿入 */
 	/** http://localhost:8080/content/insert にPOSTでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
 	@PostMapping("insert")
-	public String insert(@Validated ContentForm contentForm, BindingResult bindingResult,
-			Model model, RedirectAttributes redirectAttributes) {
+	public String insert(@Validated ContentForm contentForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		// FormからEntityへの詰め替え
 		Content content = new Content();
 		content.setTitle(contentForm.getTitle());
 		content.setContent(contentForm.getContent());
+		content.setWho(contentForm.getWho());
+		content.setWhy(contentForm.getWhy());
+		content.setTime(contentForm.getTime());
 		
 		// 日付をEntityへ格納
 		Date date = new Date();
-		long timeInMilliSeconds = date.getTime();
-		java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 		content.setReg_date(date);
 		content.setUpd_date(date);
 		
@@ -183,7 +209,7 @@ public class ContentController {
 			return "redirect:/content";
 		} else {
 			// エラーがある場合は、一覧表示処理を呼び出す
-			return showList(contentForm, model);
+			return showList(model);
 		}
 		
 	}
@@ -239,7 +265,6 @@ public class ContentController {
 			service.updateContent(content);
 			redirectAttributes.addFlashAttribute("updcomplete", "更新が完了しました");
 			return "redirect:/content";
-			// model.addAttribute("content", content);
 		} else {
 			redirectAttributes.addFlashAttribute("updcomplete", "更新に失敗しました");
 			return "redirect:/content";

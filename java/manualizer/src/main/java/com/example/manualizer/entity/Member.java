@@ -1,11 +1,9 @@
 package com.example.manualizer.entity;
 
-//import org.springframework.data.annotation.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.text.SimpleDateFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +12,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /** manualテーブル用 : Entity */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

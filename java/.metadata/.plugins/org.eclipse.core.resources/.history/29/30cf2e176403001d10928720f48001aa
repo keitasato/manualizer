@@ -1,0 +1,99 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Manualizer : CREATE</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/mycustom.css}">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v6.1.1/css/all.css}">
+
+
+  </head>
+
+  <body>
+    <!-- ヘッダー -->
+    <header th:replace="header :: header"></header>
+
+    <!-- メイン -->
+    <main>
+      <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
+      
+        <!-- 登録フォーム start -->
+        <form method="POST" th:action="@{/content/insert}"> 
+
+	        <!-- マニュアル表示 start -->
+	        <div class="container">
+	          <div class="row my-1">
+	          
+	            <!-- タイトル start -->
+	            <div class="col-10 mx-auto">
+	            <div class="input-group">
+	              <input type="text" name="title" class="form-control text-center my-1" placeholder="タイトルを入力">
+	            </div>
+	          </div>
+	            <!-- タイトル end -->
+	            
+	            <!-- だれが start -->
+	            <div class="col-8 mx-auto my-1">
+	                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="説明文を入力"></textarea>
+	            </div>  
+	            <!-- だれが end -->
+	            
+	            <!-- 理由 start -->
+	            <div class="col-8 mx-auto my-1">
+	                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="説明文を入力"></textarea>
+	            </div>  
+	            <!-- 理由 end -->
+	            
+	            <!-- いつ start -->
+	            <div class="col-8 mx-auto my-1">
+	                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="説明文を入力"></textarea>
+	            </div>  
+	            <!-- いつ end -->
+	            
+	            <!-- 説明文 start -->
+	            <div class="col-8 mx-auto my-1">
+	                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="説明文を入力"></textarea>
+	            </div>  
+	            <!-- 説明文 end -->
+	            
+	
+	          </div>
+	        </div>
+	        <!-- マニュアル表示 end -->
+	
+	        <!-- bootstrap container start -->
+	        <div class="container">
+	            <div class="row my-1">
+	
+	                <!-- 登録ボタン start -->
+	                <div class="d-grid col-2 mx-auto">
+	                    <input type="submit" class="btn btn-outline-success" value="登録" role="button" aria-disabled="true">
+	                </div>
+	                <!-- 登録ボタン end -->
+	
+	            </div>
+	          </div>
+	          <!-- bootstrap container end -->
+          
+          </form>
+          <!-- 登録フォーム end -->
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer id="copyright" class="py-1 bg-dark text-light" th:replace="footer :: footer"></footer>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
+	<script th:src="@{/js/myVue.js}"></script>
+	<script defer th:src="@{https://use.fontawesome.com/releases/v6.1.1/js/all.js}"></script>
+
+  </body>
+  
+</html>

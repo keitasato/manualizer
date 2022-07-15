@@ -26,6 +26,6 @@ public interface MemberService {
 	void deleteMemberByMail(String mail);
 	
 	// 登録済のメールアドレスか否かを判定
-	boolean existsByUsername(String mail);
+	boolean existsByMail(String mail);
 	
 }

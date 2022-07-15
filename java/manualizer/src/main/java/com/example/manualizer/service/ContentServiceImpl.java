@@ -19,6 +19,18 @@ public class ContentServiceImpl implements ContentService {
 	public Iterable<Content> selectAll() {
 		return repository.findAll();
 	}
+	
+	/**
+	@Override
+	public Iterable<Content> selectAllLike(String keyword){
+		return repository.findByTitleLikeOrfindByWhyLikeOrfindByWhoLikeOrfindByTimeLikeOrfindByContentLike(keyword);
+	}
+	*/
+	
+	@Override
+	public Iterable<Content> selectAllByTitleLike(String keyword){
+		return repository.findByTitleLike(keyword);
+	}
 
 	@Override
 	public Optional<Content> selectOneById(Integer id) {
@@ -46,8 +58,20 @@ public class ContentServiceImpl implements ContentService {
 	}
 	
 	@Override
-	public Iterable<Content> selectAllbyMail(String mail){
+	public Iterable<Content> selectAllbyMail(String mail) {
 		return repository.findAllByMail(mail);
 	}
-
+	
+	@Override
+	public void copyContent(Content from, Content to) {
+		to.setId(from.getId());
+		to.setMail(from.getMail());
+		to.setTitle(from.getTitle());
+		to.setWhy(from.getWhy());
+		to.setWho(from.getWho());
+		to.setTime(from.getTime());
+		to.setContent(from.getContent());
+		to.setReg_date(from.getReg_date());
+		to.setUpd_date(from.getUpd_date());
+	}
 }

@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8">
+    <title>footer : fragment</title>
+  </head>
+  
+    <!-- bootstrap container start -->
+	<!-- ロゴ start -->
+	<div class="container" th:fragment="logo">
+	 	<div class="row my-1">
+	      	<div class="col-2 mx-auto">
+	      		<form method="GET" th:action="@{/content}">
+	      			<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
+	        	</form>
+	      	</div>
+	     </div>
+	 </div>
+	 <!-- ロゴ end -->
+	 <!-- bootstrap container end -->
+	 
+            
+    <!-- show content fragment start -->
+    <div th:fragment="show_content(subTitle, subContent)">
+    	<div class="row mb-1">
+    		
+    		<div class="col-2 icon ml-auto" >
+		    	<i class="fa-solid fa-person fa-4x"></i>
+		    </div>
+    		
+		    <div class="col-8 mx-auto" >
+		        <p th:text="|${subTitle}${subContent}|" class="wf-sawarabimincho text-center show-sub-content"></p>
+		    </div>
+	    </div>
+    </div>
+    <!-- show content fragment end -->
+    
+    
+    <!-- update content fragment start -->
+    <div th:fragment="update_content(name, value, placeholder)">
+    	<div class="row mb-1">
+		    <div class="col-8 mx-auto" >
+		        <input type="text" th:name="${name}" class="form-control text-center my-1" th:value="${value}" th:placeholder="${placeholder}">
+		    </div>
+	    </div>
+    </div>
+    <!-- update content fragment end -->
+    
+    
+    
+
+          
+	 
+
+  
+</html>
+    

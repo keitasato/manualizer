@@ -12,19 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.context.annotation.Bean;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
-import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.security.crypto.encrypt.TextEncryptor;
 
-import com.example.manualizer.entity.Content;
 import com.example.manualizer.entity.Member;
 import com.example.manualizer.form.PasswordChangeForm;
 import com.example.manualizer.form.MemberForm;
@@ -58,16 +50,12 @@ public class AccountController {
 	/** Memberを更新 */
 	@GetMapping("/edit")
 	public String edit(Model model) {
-		// 表示用Modelへの格納
-		model.addAttribute("msg", "Keita!!!");
 		return "edit";
 	}
 	
 	/** idをKeyにしてパスワードを更新する */
 	@PostMapping("password_change")
-	public String update(@Validated PasswordChangeForm passwordForm, BindingResult bindingResult,
-			Model model, RedirectAttributes redirectAttributes) {
-		// コンテンツ情報を1件更新してリダイレクト
+	public String update(@Validated PasswordChangeForm passwordForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
@@ -83,8 +71,6 @@ public class AccountController {
 			
 			// 日付をEntityへ格納
 			Date date = new Date();
-			long timeInMilliSeconds = date.getTime();
-			java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 			member.setUpd_date(date);
 			
 			service.updateMember(member);
@@ -92,23 +78,18 @@ public class AccountController {
 			redirectAttributes.addFlashAttribute("updcomplete", "更新が完了しました");
 			return "redirect:/content";
 		} else {
-			// redirectAttributes.addFlashAttribute("updcomplete", "更新に失敗しました");
 			return "edit";
 		}
 	}
 
 	/** idをKeyにしてパスワードを更新する */
 	@PostMapping("nickname_change")
-	public String nickname_change(@Validated PasswordChangeForm passwordForm, BindingResult bindingResult,
-			Model model, RedirectAttributes redirectAttributes) {
-		// コンテンツ情報を1件更新してリダイレクト
+	public String nickname_change(@Validated PasswordChangeForm passwordForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
 		String mail = auth.getName();
 		String nickname = passwordForm.getNickname();
-		//String password = passwordForm.getPassword();
-		//String password_check = passwordForm.getPassword_check();
 		
 		Optional<Member> memberOpt = service.selectOneByMail(mail);
 		if (memberOpt.isPresent()) {
@@ -118,8 +99,6 @@ public class AccountController {
 			
 			// 日付をEntityへ格納
 			Date date = new Date();
-			long timeInMilliSeconds = date.getTime();
-			java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 			member.setUpd_date(date);
 			
 			service.updateMember(member);
@@ -127,7 +106,6 @@ public class AccountController {
 			redirectAttributes.addFlashAttribute("updcomplete", "更新が完了しました");
 			return "redirect:/content";
 		} else {
-			// redirectAttributes.addFlashAttribute("updcomplete", "更新に失敗しました");
 			return "edit";
 		}
 	}
@@ -136,7 +114,6 @@ public class AccountController {
 	/** http://localhost:8080/account/delete にPOSTでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
 	@PostMapping("delete")
 	public String delete(Model model, RedirectAttributes redirectAttributes) {
-		// コンテンツ情報を1件削除してリダイレクト
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得

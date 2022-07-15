@@ -20,18 +20,7 @@
     <main>
       <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
       
-      	<!-- bootstrap container start -->
-	    <div class="container">
-	     	<div class="row my-1">
-          	<!-- ロゴ start -->
-	          	<div class="col-2 mx-auto">
-	          		<form method="GET" th:action="@{/content}">
-	          			<input type="image" th:src="@{/img/logo_color.png}" class="img-fluid" alt="...">
-	            	</form>
-	          	</div>
-	          	<!-- ロゴ end -->
-	         </div>
-	     </div>
+      	<div th:replace="fragment :: logo"></div>
           	
       
         <!-- メールアドレス表示 start -->
@@ -42,7 +31,7 @@
 
 	            <!-- ユーザ名 start -->
 	            <div class="col-5 mx-auto">
-		        	<h5 th:text="|${username} ${msg}|" class="text-center my-1">dfasda;</h5>
+		        	<h5 th:text="|${mail} ${msg}|" class="text-center my-1">dfasda;</h5>
 	          	</div>
 	            <!-- ユーザ名 end -->
 	
@@ -56,15 +45,7 @@
     </main>
 
     <!-- フッター -->
-    <footer id="copyright" class="py-1 bg-dark text-light">
-      <div class="container text-center">
-        <!--コピーライト-->
-        <p>
-          <small>Copyright &copy;2022 Keita SATOU, All Rights Reserved.</small>
-        </p>
-      </div>
-
-    </footer>
+    <footer id="copyright" class="py-1 bg-dark text-light" th:replace="footer :: footer"></footer>
 
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	<script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
