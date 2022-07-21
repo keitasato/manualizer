@@ -34,6 +34,7 @@ INDEX VERSION 1.131+C:\Users\Keita Sato\Documents\portfolio\portfolio_03_manual\
 412506685.index
 4185713558.index
 3685198122.index
+732968291.index
 422791067.index
 2293559109.index
 3544330114.index

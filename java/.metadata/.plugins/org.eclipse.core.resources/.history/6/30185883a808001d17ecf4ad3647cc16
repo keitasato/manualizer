@@ -24,6 +24,7 @@ import com.example.manualizer.entity.Member;
 import com.example.manualizer.form.ContentForm;
 import com.example.manualizer.service.ContentService;
 import com.example.manualizer.service.MemberService;
+import com.example.manualizer.form.SearchForm;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -89,8 +90,8 @@ public class ContentController {
 	
 	/** 検索ワードに合致するContentの一覧を表示 */
 	/** http://localhost:8080/content/ にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
-	@GetMapping("search")
-	public String showSearchList2(@RequestParam(defaultValue = "NOT PARAM") String keyword, Model model) {
+	@PostMapping("search")
+	public String showSearchList(@Validated SearchForm searchForm, BindingResult bindingResult, Model model) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
@@ -100,7 +101,7 @@ public class ContentController {
 		
 		// コンテンツの一覧を取得
 		//Iterable<Content> list = service.selectAllLike(form.getKeyword());
-		Iterable<Content> list = service.selectAllByLike("%"+keyword+"%");
+		Iterable<Content> list = service.selectAllByLike("%"+searchForm.getKeyword()+"%");
 		List<Content> result = new ArrayList<Content>();
 		
 		// カードに表示する説明文を２０文字以下に抑える

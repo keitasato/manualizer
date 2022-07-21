@@ -24,6 +24,7 @@ import com.example.manualizer.entity.Member;
 import com.example.manualizer.form.ContentForm;
 import com.example.manualizer.service.ContentService;
 import com.example.manualizer.service.MemberService;
+import com.example.manualizer.form.SearchForm;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class ContentController {
 	/** 検索ワードに合致するContentの一覧を表示 */
 	/** http://localhost:8080/content/ にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
 	@GetMapping("search")
-	public String showSearchList2(@RequestParam(defaultValue = "NOT PARAM") String keyword, Model model) {
+	public String showSearchList2(@PathVariable String keyword, Model model) {
 		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//Principalからログインユーザの情報を取得
@@ -101,6 +102,51 @@ public class ContentController {
 		// コンテンツの一覧を取得
 		//Iterable<Content> list = service.selectAllLike(form.getKeyword());
 		Iterable<Content> list = service.selectAllByLike("%"+keyword+"%");
+		List<Content> result = new ArrayList<Content>();
+		
+		// カードに表示する説明文を２０文字以下に抑える
+		// メールアドレスの代わりにニックネームを格納する
+		int maxLength =20;
+		for (Content content : list) {
+			Content addContent = new Content();
+			
+			service.copyContent(content, addContent);
+			
+			String explain = content.getContent();
+			int length = explain.length();
+			int cut = Math.min(length, maxLength);
+			
+			if(length >= maxLength) addContent.setContent(explain.substring(0, cut) + "...");
+			else addContent.setContent(explain);
+			
+			// コンテンツの作成者のニックネームを表示用に格納
+			Optional<Member> memberOpt = memberService.selectOneByMail(content.getMail());
+			Member member = memberOpt.get();
+			addContent.setMail(member.getNickname());
+			
+			result.add(addContent);
+		}
+		
+		// 表示用Modelへの格納
+		model.addAttribute("list", result);
+		
+		return "index";
+	}
+	
+	/** 検索ワードに合致するContentの一覧を表示 */
+	/** http://localhost:8080/content/ にGETでアクセスすると、以下の処理がされてreturnされたhtmlファイルが読み込まれる */
+	@PostMapping("search")
+	public String showSearchList(@Validated SearchForm searchForm, BindingResult bindingResult, Model model) {
+		// ログイン成功時に呼び出されるメソッドSecurityContextHolderから認証済みユーザの情報を取得しモデルへ追加する
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String mail = auth.getName();
+		//System.out.println("searching");
+		//System.out.println(searchForm.getKeyword());
+		
+		// コンテンツの一覧を取得
+		//Iterable<Content> list = service.selectAllLike(form.getKeyword());
+		Iterable<Content> list = service.selectAllByLike("%"+searchForm.getKeyword()+"%");
 		List<Content> result = new ArrayList<Content>();
 		
 		// カードに表示する説明文を２０文字以下に抑える
