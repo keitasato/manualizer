@@ -34,7 +34,7 @@
                 <div class="card-body">  
                   <h5 class="card-title" th:text="${content.title}">共通化</h5>
                   <p class="card-text" th:text="${content.content}">作業開始前に共通化ルールに作成</p>
-                  <a th:href="@{content/show_{id}(id=${content.id})}" class="stretched-link"></a>
+                  <a th:href="@{/content/show_{id}(id=${content.id})}" class="stretched-link"></a>
                   <small class="text-black-50" th:text="${content.mail}">user</small>
                 </div>
               </div>

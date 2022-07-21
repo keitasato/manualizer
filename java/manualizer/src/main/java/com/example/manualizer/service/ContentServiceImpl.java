@@ -31,6 +31,17 @@ public class ContentServiceImpl implements ContentService {
 	public Iterable<Content> selectAllByTitleLike(String keyword){
 		return repository.findByTitleLike(keyword);
 	}
+	
+	@Override
+	public Iterable<Content> selectAllByWhoLike(String keyword){
+		return repository.findByWhoLike(keyword);
+	}
+	
+	@Override
+	public Iterable<Content> selectAllByLike(String keyword){
+		//return repository.findByTitleLike(keyword);
+		return repository.searchByLike(keyword);
+	}
 
 	@Override
 	public Optional<Content> selectOneById(Integer id) {

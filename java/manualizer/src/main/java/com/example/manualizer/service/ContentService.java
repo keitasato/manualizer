@@ -16,7 +16,11 @@ public interface ContentService {
 	
 	//Iterable<Content> selectAllLike(String keyword);
 	
-	Iterable<Content> selectAllByTitleLike(String keyword); 
+	Iterable<Content> selectAllByTitleLike(String keyword);
+	
+	Iterable<Content> selectAllByWhoLike(String keyword);
+	
+	Iterable<Content> selectAllByLike(String keyword); 
 	
 	/** コンテンツ情報をidをキーに１件取得 */
 	Optional<Content> selectOneById(Integer id);
