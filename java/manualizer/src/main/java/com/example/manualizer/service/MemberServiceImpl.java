@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public boolean existsByUsername(String mail) {
+	public boolean existsByMail(String mail) {
 		return repository.existsById(mail);
 	}
 

@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Manualizer : SHOW</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/mycustom.css}">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v6.1.1/css/all.css}">
+
+
+  </head>
+
+  <body>
+    <!-- ヘッダー -->
+    <header th:replace="header :: header"></header>
+    
+        <!-- メイン -->
+        <main>
+          <div id="app" class="d-grid col-11 mx-auto body-background-color my-2">
+    
+            <!-- マニュアル表示 start -->
+            <div class="container">
+              <div class="row my-1">
+              
+                <!-- タイトル start -->
+                <div class="col-10 mx-auto">
+                    <h1 th:text="${content.title}" class="show-title wf-sawarabimincho text-center">タイトル</h1>
+                </div>
+                <!-- タイトル end -->
+                
+                
+                
+                <!-- 説明文 start -->
+                <div class="col-8 mx-auto">
+                    <p th:text="${content.content}" class="wf-sawarabimincho"></p>
+                </div>  
+                <!-- 説明文 end -->
+
+              </div>
+            </div>
+            <!-- マニュアル表示 end -->
+
+            <!-- 編集・削除 start -->
+            <th:block th:if="${own}">
+            <div class="container">
+                <div class="row my-1">
+
+                    <!-- 更新ボタン start -->
+                    <div class="d-grid col-2 mx-auto">
+                    	<form method="GET" th:action="@{/content/edit_{id}(id=${content.id})}">
+                    		<input type="hidden" name="id" th:value="${content.id}">
+                        	<input type="submit" class="btn btn-outline-success form-control" value="編集" role="button" aria-disabled="true">
+                    	</form>
+                    </div>
+                    <!-- 更新ボタン end -->
+
+                    <!-- 削除ボタン start -->
+                    <div class="d-grid col-2 mx-auto">
+                    	<form method="POST" th:action="@{/content/delete}">
+                    		<input type="hidden" name="id" th:value="${content.id}">
+                        	<input type="submit" class="btn btn-outline-danger form-control" value="削除" role="button" aria-disabled="true">
+                    	</form>
+                    </div>
+                    <!-- 削除ボタン end -->
+    
+                </div>
+              </div>
+              </th:block>
+              <!-- 編集・削除 end -->
+
+
+    
+          </div>
+        </main>
+    
+        <!-- フッター -->
+        <footer id="copyright" class="py-1 bg-dark text-light" th:replace="footer :: footer"></footer>
+    
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js}"></script>
+		<script th:src="@{/js/myVue.js}"></script>
+		<script defer th:src="@{https://use.fontawesome.com/releases/v6.1.1/js/all.js}"></script>
+    
+      </body>
+</html>

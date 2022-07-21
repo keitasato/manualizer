@@ -1,7 +1,6 @@
 package com.example.manualizer.form;
 
 import javax.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,13 +17,20 @@ public class ContentForm {
 	@NotBlank
 	private String title;
 	
+	/** 理由 */
+	@NotBlank
+	private String why;
+	
+	/** タイミング */
+	@NotBlank
+	private String time;
+	
+	/** 誰が */
+	@NotBlank
+	private String who;
+	
 	/** 内容 */
 	@NotBlank
 	private String content;
-	
-	/** 登録 or 更新フラグ */
-	// 登録 : true
-	// 更新 : false
-	// private boolean isReg;
 
 }

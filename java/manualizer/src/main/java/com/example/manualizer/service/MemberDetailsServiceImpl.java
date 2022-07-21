@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.manualizer.entity.Content;
 import com.example.manualizer.entity.Member;
 import com.example.manualizer.repository.MemberRepository;
 
@@ -39,8 +37,6 @@ public class MemberDetailsServiceImpl implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException{
-		//Member member = repository.findById(mail);
-		//Optional<Member> memberOpt = service.selectOneById(contentForm.getId());
 		Optional<Member> memberOpt = repository.findById(mail);
 		if (!memberOpt.isPresent()) {
 			throw new UsernameNotFoundException("Mail address : " + mail + " was not found in the database");

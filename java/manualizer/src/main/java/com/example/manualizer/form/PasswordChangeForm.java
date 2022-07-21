@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PasswordChangeForm {
 	@NotBlank
+	private String nickname;
+	
+	@NotBlank
 	private String password;
 	
 	@NotBlank
